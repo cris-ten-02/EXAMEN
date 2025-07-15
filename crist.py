@@ -12,8 +12,6 @@ stock = {'8475HD': [387990,10], '2175HD': [327990,4], 'JjfFHD': [424990,1],
               'fgdxFHD': [664990,21], '123FHD': [290890,32], '342FHD': [444990,7],
               'GF75HD': [749990,2], 'UWU131HD': [349990,1], 'FS1230HD': [249990,0], 
                  }
-marcas=['HP', 'ACER', 'ASUS', 'DELL']
-modelo=['8475HD','2175HD','JjfFHD','fgdxFHD','GF75HD', '123FHD','342FHD','UWU131HD']
 
 def stock_marca():
     marca = input('Ingrese marca de producto: ').capitalize()
@@ -25,16 +23,27 @@ def stock_marca():
     if not encontrados:
         print(f'No se encontraron productos para la marca "{marca}".')
           
-def busqueda_ram_precio(ram_min, ram_max, precio):
-    ram_max=input('ram_max0')
-    ram_min=input('ram_max0')
-    precio=int(input('ingrese el precio'))
-    mar={}
-    if marcas in stock:
-        mar[stock]= stock[marcas]
-        return(mar)
-    else:
-        print('no')
+def busqueda_ram_precio():
+    try:
+        ram_min = int(input('Ingrese RAM mínima (GB): '))
+        ram_max = int(input('Ingrese RAM máxima (GB): '))
+        precio_max = int(input('Ingrese precio máximo: '))
+    except ValueError:
+        print("Por favor ingrese valores numéricos válidos.")
+        return
+
+    for modelo, datos in productos.items():
+        if modelo in stock:
+            ram_str = datos[2].replace('GB', '')
+            try:
+                ram = int(ram_str)
+            except:
+                continue
+            precio = stock[modelo][0]
+            if ram_min <= ram <= ram_max and precio <= precio_max:
+                print(f'{modelo} - RAM: {ram}GB - Precio: ${precio}')
+                
+
 def eliminar_producto(modelo):
   while True:
     if modelo != None:
