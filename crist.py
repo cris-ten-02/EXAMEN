@@ -44,42 +44,39 @@ def busqueda_ram_precio():
                 print(f'{modelo} - RAM: {ram}GB - Precio: ${precio}')
                 
 
-def eliminar_producto(modelo):
-  while True:
-    if modelo != None:
-        del productos[modelo]
-        del stock[marcas]
-        print('producto eliminado exitosamente')
-        otro=('desea eliminar otro producto?')
-        if otro=='si':
-             eliminar_producto(modelo)
-        else:
-             menu()
+def eliminar_producto():
+    modelo_eliminar = input("Ingrese el modelo del producto que desea eliminar: ")
+    if modelo_eliminar in productos and modelo_eliminar in stock:
+        del productos[modelo_eliminar]
+        del stock[modelo_eliminar]
+        print(f'Producto {modelo_eliminar} eliminado exitosamente.')
     else:
-        print('prducot no encontrado')
+        print("Producto no encontrado o ya eliminado.")
+
 
 def menu():
- while True:
-    print('MENÚ PRINCIPAL BIENVENIDO')
-    print('=================================')
-    print('1- Stock Marca ')
-    print('2- busqueda por Ram y precio.')
-    print('3- eliminar producto ')
-    print('3- salir')
-            
-    opc = input("Seleccione una opción (1-5): ")
-        
-    if opc == "1":
-          stock_marca(marcas)
-    elif opc == "2":
-            print('holi')
-    elif opc == "3":
-            eliminar_producto(modelo)
-    elif opc == "4":
+    while True:
+        print('\nMENÚ PRINCIPAL - BIENVENIDO')
+        print('===============================')
+        print('1 - Ver stock por marca')
+        print('2 - Búsqueda por RAM y precio')
+        print('3 - Eliminar producto')
+        print('4 - Salir')
+
+        opc = input("Seleccione una opción (1-4): ")
+
+        if opc == "1":
+            stock_marca()
+        elif opc == "2":
+            busqueda_ram_precio()
+        elif opc == "3":
+            eliminar_producto()
+        elif opc == "4":
             print("Gracias por usar Pibooks.")
             break
-    else:
+        else:
             print("Opción no válida. Intente nuevamente.")
 
-#
+
+# Ejecutar el menú
 menu()
