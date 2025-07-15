@@ -15,10 +15,15 @@ stock = {'8475HD': [387990,10], '2175HD': [327990,4], 'JjfFHD': [424990,1],
 marcas=['HP', 'ACER', 'ASUS', 'DELL']
 modelo=['8475HD','2175HD','JjfFHD','fgdxFHD','GF75HD', '123FHD','342FHD','UWU131HD']
 
-def stock_marca(marcas):
-     marcas=input('ingrese modelo de producto').isalpha()
-     for clave,valor in productos.items():
-        print(f'{clave}  {valor[0]}  ')  
+def stock_marca():
+    marca = input('Ingrese marca de producto: ').capitalize()
+    encontrados = False
+    for modelo, datos in productos.items():
+        if datos[0].lower() == marca.lower() and modelo in stock:
+            print(f'Modelo: {modelo}, Stock: {stock[modelo][1]}, Precio: ${stock[modelo][0]}')
+            encontrados = True
+    if not encontrados:
+        print(f'No se encontraron productos para la marca "{marca}".')
           
 def busqueda_ram_precio(ram_min, ram_max, precio):
     ram_max=input('ram_max0')
